@@ -20,11 +20,15 @@ class DbHelper:
             return -1
         else:
             return 1
+
     def search(self, email, password):
         try:
             self.mycursor.execute(""" SELECT * FROM `users` WHERE `email` = '{}' AND PASSWORD LIKE '{}'""".format(email, password))
-            self.conn.commit()
+            data=self.mycursor.fetchall()
+            return data
         except Exception as e:
             print("Search error:", e)
+        else:
+            print("successfully logged in")
 
 
